@@ -1,0 +1,21 @@
+body{background:#badbe0}
+body:not([data-experience="ready"])>.masthead,body:not([data-experience="ready"])>.intro,body:not([data-experience="ready"])>.bottom,body:not([data-experience="ready"])>#quick-stickers,body:not([data-experience="ready"])>#scene,body:not([data-experience="ready"])>#status{visibility:hidden}
+#accessible-resume{position:fixed;inset:0;overflow:auto;background:linear-gradient(160deg,#d8eff0,#f8f5e9 65%,#efe0c6);padding:40px max(20px,calc((100vw - 1020px)/2));z-index:8;overscroll-behavior:contain;scrollbar-width:thin}
+.paper-brand{font:700 30px Georgia,serif;margin:0 0 28px;letter-spacing:-1px}.paper-brand span{font:10px sans-serif;letter-spacing:2px;margin-left:18px}
+.paper-hero{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center}.paper-hero img{width:100%;height:310px;object-fit:cover;object-position:50% 16%;border-radius:28px;box-shadow:0 20px 60px #173f4914}
+.paper-hero h1{font:500 clamp(28px,4vw,46px)/1.35 'STKaiti','KaiTi',serif;margin:12px 0}.paper-hero p{font-size:14px;line-height:1.9}.paper-status{border-top:1px solid #173f4920;padding-top:18px;margin-top:24px}.paper-status p{font-size:12px}.paper-actions{display:flex;flex-wrap:wrap;gap:8px}.paper-actions button{font-size:12px;min-height:44px}
+.paper-record{padding:28px 32px;border:1px solid #fff9;background:#fffdf594;border-radius:24px;margin-top:24px;overflow-wrap:anywhere}.paper-record small{font-size:11px;color:#58777c}.paper-record h2{font-size:23px;line-height:1.5;margin:13px 0}.paper-record h3{font-size:14px;font-weight:500}.paper-record p{white-space:pre-wrap;line-height:1.95;font-size:13px}.paper-record ul{padding-left:20px;line-height:1.9;font-size:13px}.paper-record .skill-tags{margin-top:20px}.paper-footer{font-size:11px;margin:28px 0 0;color:#58777c}
+#resume-mode{position:fixed;left:38px;bottom:82px;z-index:3;font-size:11px;padding:10px 14px;background:#fffdf5b0;min-height:44px}
+body:not([data-experience="ready"])>#resume-mode,body[data-story]:not([data-story="idle"])>#resume-mode{display:none}
+.experience.resume-glass{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px)}
+.resume-toolbar .close{width:44px;height:44px;top:14px}
+@supports not (backdrop-filter:blur(1px)){.experience.resume-glass{background:#eef6f4f5}}
+@media(pointer:coarse){.viewbar button,#quick-stickers button{min-height:44px}.resume-toolbar .close{top:8px}.viewbar{gap:0}#tooltip{display:none!important}}
+@media(max-width:650px){
+ #accessible-resume{padding:calc(24px + env(safe-area-inset-top,0px)) 18px calc(28px + env(safe-area-inset-bottom,0px))}.paper-brand{margin-bottom:22px}.paper-hero{grid-template-columns:110px 1fr;gap:18px}.paper-hero img{height:170px;border-radius:20px}.paper-hero h1{font-size:25px}.paper-hero p{font-size:11px}.paper-status{grid-column:1/-1}.paper-record{padding:22px}.paper-record h2{font-size:20px}
+ .bottom{bottom:calc(10px + env(safe-area-inset-bottom,0px))}.viewbar{border-radius:25px;max-width:360px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.viewbar button{min-height:38px;padding:6px 8px}.viewbar button:nth-last-child(-n+2){grid-column:span 2}.masthead{top:calc(16px + env(safe-area-inset-top,0px))}#quick-stickers{bottom:calc(112px + env(safe-area-inset-bottom,0px));gap:10px}#resume-mode{top:calc(62px + env(safe-area-inset-top,0px));bottom:auto;left:auto;right:20px;font-size:10px}.intro{top:104px}.intro h1{font-size:25px}
+ .experience.resume-glass{max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+}
+@media(pointer:coarse) and (max-width:650px){.viewbar button{min-height:44px}}
+@media(max-height:500px) and (orientation:landscape){.intro{display:none}.masthead{top:12px}.brand span{display:none}.bottom{bottom:8px}.viewbar{padding:3px}.viewbar button{padding:5px 10px}#quick-stickers{top:65px;bottom:auto;left:auto;right:16px}#resume-mode{bottom:72px;left:20px;right:auto;top:auto}}
+@media(max-width:360px){.resume-toolbar-label{display:none}.paper-brand span{font-size:8px;letter-spacing:1.5px}.paper-hero .eyebrow{font-size:8px;letter-spacing:1.5px}.paper-hero{grid-template-columns:100px 1fr;gap:14px}}

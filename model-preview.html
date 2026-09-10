@@ -1,5 +1,24 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css"><link rel="stylesheet" href="./resume.css"><script type="importmap">{"imports":{"three":"./three.module.js"}}</script></head>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css"><link rel="stylesheet" href="./resume.css"><script type="importmap">{"imports":{"three":"./three.module.js"}}</script><link rel="stylesheet" href="./compatibility.css"></head>
 <body>
+<!-- accessible-resume:start -->
+<button id="resume-mode">阅读图文履历 ↗</button>
+<main id="accessible-resume" aria-label="Lam 的图文履历">
+ <p class="paper-brand">Lam.<span>A LITTLE ABOUT ME</span></p>
+ <div class="paper-hero"><img src="./portrait-poster.jpg" width="640" height="800" alt="Lam 吐舌头微笑的虚拟肖像"><div><div class="eyebrow">SOMEWHERE BY THE SEA</div><h1>认真生活，<br>偶尔调皮。</h1><p>每一段经历，都是我的一部分。<br>从这里开始，认识多一点的我。</p></div></div>
+ <div class="paper-status"><p id="load-message" role="status">图文履历可直接浏览；开启 JavaScript 后可尝试三维肖像。</p><div class="paper-actions"><button id="read-resume">先看图文履历</button><button id="retry-3d" hidden>重试三维肖像 ↗</button></div></div>
+ <article class="paper-record"><small>校园经历 · 2020 — 2024 · 示例内容</small><h2>示例学校 · 校园活动策划</h2><h3>把好奇心，变成行动</h3><p>这里是可替换的校园经历。
+
+从一次校园活动开始，练习把想法写成方案、协调伙伴，再把现场照顾好。可以在这里介绍你的学校、专业、社团经历或具体项目。
+
+替换成真实经历时，建议写清楚：你负责什么、采取了什么行动，以及最终结果。</p><ul><li>参与校园活动的策划与执行，整理流程、分工和现场安排。</li><li>协调成员协作，收集参与者反馈并复盘改进。</li></ul><div class="skill-tags"><span>活动策划</span><span>团队协作</span><span>沟通表达</span></div></article>
+<article class="paper-record"><small>密室工作 · 2024 — 至今 · 示例内容</small><h2>示例密室逃脱门店 · 体验运营</h2><h3>让每一次入场，都有故事</h3><p>这里是可替换的工作履历。
+
+负责玩家接待、场次安排与体验流程，在剧情节奏、现场沟通和细节反馈之间，让一次游戏成为值得记住的体验。
+
+可以加入你参与的主题、门店照片、团队合影或项目成绩。这些文字仅用于演示，不代表你的真实工作经历。</p><ul><li>组织玩家接待与场次安排，跟进完整体验流程。</li><li>协调现场节奏与突发情况，将玩家反馈转化为服务改进。</li></ul><div class="skill-tags"><span>体验运营</span><span>现场协调</span><span>客户沟通</span></div></article><p class="paper-footer">公开预览 · 当前经历为演示内容</p>
+</main>
+<!-- accessible-resume:end -->
+
 <canvas id="scene" aria-label="可旋转的三维人物；点击脸上的贴纸阅读经历"></canvas>
 <header class="masthead"><div class="brand">Lam.<span>A LITTLE ABOUT ME</span></div><span class="public-badge">公开预览</span></header>
 <section class="intro"><div class="eyebrow">SOMEWHERE BY THE SEA</div><h1>认真生活，<br>偶尔调皮。</h1><p>把走过的地方，变成身上的小贴纸。<br>点开一张，认识多一点的我。</p><div class="note"><span>↗</span><span>试着点一下脸上的小贴纸</span></div></section>
@@ -25,6 +44,6 @@
  </div>
 </dialog>
 
-<script type="module" src="./portfolio.js"></script></body></html>
+<script src="./boot.js" defer></script></body></html>
 
 
