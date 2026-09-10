@@ -68,7 +68,7 @@ const clock=new THREE.Clock();renderer.setAnimationLoop(()=>{
  if(document.querySelector('dialog[open]'))return;
  const now=performance.now();if(now-lastRender<32)return;lastRender=now;
  const dt=Math.min(clock.getDelta(),.1);if(story.phase==='idle')controls.update();else story.tick(now);if(waves)ocean.uniforms.time.value+=dt;
- if(face){raycaster.setFromCamera(gazePointer,camera);camera.getWorldDirection(forward);plane.setFromNormalAndCoplanarPoint(forward,camera.position.clone().addScaledVector(forward,1.25));raycaster.ray.intersectPlane(plane,target);face.update(target,dt,eyeFollow);if(performance.now()-lastDiagnostic>350){lastDiagnostic=performance.now();canvas.dataset.gaze=JSON.stringify(face.gaze.map(v=>[+v.x.toFixed(5),+v.y.toFixed(5)]));}}
+ if(face){raycaster.setFromCamera(gazePointer,camera);camera.getWorldDirection(forward);plane.setFromNormalAndCoplanarPoint(forward,camera.position.clone().addScaledVector(forward,1.25));raycaster.ray.intersectPlane(plane,target);face.update(target,dt,eyeFollow,activeView==='portrait');if(performance.now()-lastDiagnostic>350){lastDiagnostic=performance.now();canvas.dataset.gaze=JSON.stringify(face.gaze.map(v=>[+v.x.toFixed(5),+v.y.toFixed(5)]));}}
  canvas.dataset.camera=JSON.stringify({position:camera.position.toArray().map(n=>+n.toFixed(5)),target:controls.target.toArray().map(n=>+n.toFixed(5)),phase:story.phase});
  renderer.clear();renderer.render(ocean.scene,ocean.camera);renderer.clearDepth();renderer.render(scene,camera);
 });

@@ -48,17 +48,19 @@ export function bindFace(body) {
     shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>\nroughnessFactor=mix(roughnessFactor,.75,tongue);`);
     shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>', `#include <metalnessmap_fragment>\nmetalnessFactor*=1.-tongue;`);
   };
-  material.customProgramCacheKey = () => 'lam-face-repair-gaze-v1';
+  material.customProgramCacheKey = () => 'lam-face-repair-gaze-v2';
   body.material = material;
   const world = new THREE.Vector3(), local = new THREE.Vector3();
   return {
     gaze, centers,
-    update(target, delta, enabled=true) {
+    update(target, delta, enabled=true, portrait=false) {
       for(let i=0;i<2;i++) {
         local.copy(target); body.worldToLocal(local); local.sub(centers[i]);
         const z = Math.max(.3,Math.abs(local.z));
-        world.set(THREE.MathUtils.clamp(local.x/z,-.75,.75)*.009,
-          THREE.MathUtils.clamp(local.y/z,-.5,.5)*.009,0);
+        // A wider portrait gaze remains clipped by the existing eyelid aperture.
+        const gain=portrait?1.65:1, limitX=portrait?.0105:.00675, limitY=portrait?.006:.0045;
+        world.set(THREE.MathUtils.clamp(local.x/z*.009*gain,-limitX,limitX),
+          THREE.MathUtils.clamp(local.y/z*.009*gain,-limitY,limitY),0);
         gaze[i].lerp(enabled ? new THREE.Vector2(world.x,world.y) : new THREE.Vector2(),1-Math.exp(-delta*9));
       }
     }
