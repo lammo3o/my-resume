@@ -1,4 +1,4 @@
-import * as THREE from './three.module.js';
+import * as THREE from './three.module.js?v=20260910b';
 
 export const shortestAngle=(from,to)=>from+Math.atan2(Math.sin(to-from),Math.cos(to-from));
 export const cameraEase=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;

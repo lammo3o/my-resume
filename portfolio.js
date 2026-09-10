@@ -1,18 +1,18 @@
 import * as THREE from 'three';
-import {GLTFLoader} from './GLTFLoader.js';
-import {DRACOLoader} from './DRACOLoader.js';
-import {chooseQuality,TapGesture} from './compatibility.js';
-import {OrbitControls} from './OrbitControls.js';
-import {createOcean} from './ocean.js';
-import {bindFace} from './avatar-surface.js';
-import {StickerLayer,stickerSVG,svgURL} from './stickers.js';
-import {DEFAULT_STICKERS,readPortfolio,isClick} from './portfolio-data.js';
-import {setupEditor} from './viewer.js';
-import {CameraStory} from './camera-story.js';
+import {GLTFLoader} from './GLTFLoader.js?v=20260910b';
+import {DRACOLoader} from './DRACOLoader.js?v=20260910b';
+import {chooseQuality,TapGesture} from './compatibility.js?v=20260910b';
+import {OrbitControls} from './OrbitControls.js?v=20260910b';
+import {createOcean} from './ocean.js?v=20260910b';
+import {bindFace} from './avatar-surface.js?v=20260910b';
+import {StickerLayer,stickerSVG,svgURL} from './stickers.js?v=20260910b';
+import {DEFAULT_STICKERS,readPortfolio,isClick} from './portfolio-data.js?v=20260910b';
+import {setupEditor} from './viewer.js?v=20260910b';
+import {CameraStory} from './camera-story.js?v=20260910b';
 const $=id=>document.getElementById(id),canvas=$('scene');
 const quality=chooseQuality({coarse:matchMedia('(any-pointer: coarse)').matches,cores:navigator.hardwareConcurrency,memory:navigator.deviceMemory,saveData:navigator.connection?.saveData,requested:new URLSearchParams(location.search).get('quality')});
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,quality==='mobile'?1.25:1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.98;renderer.autoClear=false;
-const scene=new THREE.Scene(),ocean=createOcean(),camera=new THREE.PerspectiveCamera(32,1,.01,100);
+const scene=new THREE.Scene(),ocean=createOcean(),camera=new THREE.PerspectiveCamera(32,1,.1,30);
 const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.09;controls.enablePan=false;controls.minDistance=1.15;controls.maxDistance=6.8;controls.minPolarAngle=.2;controls.maxPolarAngle=Math.PI*.82;controls.rotateSpeed=.55;
 scene.add(new THREE.HemisphereLight(0xe5f4ff,0xb5a88d,2));
 for(const [color,intensity,pos] of [[0xfff0df,2.2,[-3,4,5]],[0xc8e8ff,.65,[4,1,3]],[0xffffff,1.6,[2,3,-4]]]){const light=new THREE.DirectionalLight(color,intensity);light.position.fromArray(pos);scene.add(light);}
@@ -64,12 +64,16 @@ const draco=new DRACOLoader().setDecoderPath('./').setWorkerLimit(quality==='mob
 window.avatarBoot?.onStop(()=>{renderer.setAnimationLoop(null);controls.enabled=false;draco.dispose();});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();window.avatarBoot?.fail();});
 const modelURL=quality==='mobile'?'./character-mobile.glb':'./character-web.glb';
-new GLTFLoader().setDRACOLoader(draco).load(modelURL,g=>{
+new GLTFLoader().setDRACOLoader(draco).load(modelURL,async g=>{
  if(window.avatarBoot&&!window.avatarBoot.alive())return;
  model=g.scene;const box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3()),scale=2.3/size.y;model.scale.setScalar(scale);model.position.copy(center).multiplyScalar(-scale);scene.add(model);
  model.traverse(n=>{if(n.isMesh){if(!body||n.geometry.attributes.position.count>body.geometry.attributes.position.count)body=n;for(const m of Array.isArray(n.material)?n.material:[n.material])if(m.map)m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}});
- face=bindFace(body);layer=new StickerLayer(body);applyStickers(stickers);loaded=true;$('status').hidden=true;window.avatarBoot?.ready();draco.dispose();
- window.avatarPortfolio={getState:()=>({loaded,quality,stickerCount:stickers.length,eyes:face.gaze.map(v=>v.toArray()),hoverId,placement:!!placement,view:activeView,triangles:body.geometry.index.count/3}),project:(id)=>{const s=stickers.find(s=>s.id===id);if(!s)return null;const p=body.localToWorld(new THREE.Vector3().fromArray(s.position)).project(camera);return {x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2};}};
+ face=bindFace(body);layer=new StickerLayer(body);window.avatarBoot?.progress('正在贴上我的小故事…');
+ try{await layer.ready;}catch(e){window.avatarBoot?.fail();console.error('Sticker textures failed',e);return;}
+ if(window.avatarBoot&&!window.avatarBoot.alive())return;
+ applyStickers(stickers);for(const t of Object.values(layer.textures))renderer.initTexture(t);
+ loaded=true;$('status').hidden=true;window.avatarBoot?.ready();draco.dispose();
+ window.avatarPortfolio={getState:()=>({loaded,quality,stickerCount:stickers.length,stickerTextures:Object.values(layer.textures).map(t=>({loaded:!!t.image?.complete,width:t.image?.width,height:t.image?.height})),eyes:face.gaze.map(v=>v.toArray()),hoverId,placement:!!placement,view:activeView,triangles:body.geometry.index.count/3}),project:(id)=>{const s=stickers.find(s=>s.id===id);if(!s)return null;const p=body.localToWorld(new THREE.Vector3().fromArray(s.position)).project(camera);return {x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2};}};
 },e=>{const text=e.total?'正在准备三维肖像 · '+Math.round(e.loaded/e.total*100)+'%':'正在准备三维肖像…';$('status').textContent=text;window.avatarBoot?.progress(text);},e=>{window.avatarBoot?.fail();console.error(e);});
 let lastDiagnostic=0,lastRender=0;
 const clock=new THREE.Clock();renderer.setAnimationLoop(()=>{

@@ -20,3 +20,16 @@ body:not([data-experience="ready"])>#resume-mode,body[data-story]:not([data-stor
 @media(max-height:500px) and (orientation:landscape){.intro{display:none}.masthead{top:12px}.brand span{display:none}.bottom{bottom:8px}.viewbar{padding:3px}.viewbar button{padding:5px 10px}#quick-stickers{top:65px;bottom:auto;left:auto;right:16px}#resume-mode{bottom:72px;left:20px;right:auto;top:auto}}
 @media(max-width:360px){.resume-toolbar-label{display:none}.paper-brand span{font-size:8px;letter-spacing:1.5px}.paper-hero .eyebrow{font-size:8px;letter-spacing:1.5px}.paper-hero{grid-template-columns:100px 1fr;gap:14px}}
 @media(max-width:650px) and (max-height:700px){.intro{display:none}}
+
+#loading-screen{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:radial-gradient(ellipse at 65% 15%,#f6fcf4 0,transparent 40%),linear-gradient(160deg,#b3dfe7,#e6f1e6 66%,#f5e5ca);color:#173f49}
+.loading-card{text-align:center;padding:32px;max-width:90vw}.loading-brand{font:700 54px Georgia,serif;letter-spacing:-3px}.loading-brand span{color:#558b86}.loading-orbit{display:flex;justify-content:center;align-items:center;gap:9px;height:64px}.loading-orbit i{display:block;width:8px;height:8px;border-radius:50%;background:#487d7d;animation:sea-breathe 1.4s ease-in-out infinite}.loading-orbit i:nth-child(2){animation-delay:.16s}.loading-orbit i:nth-child(3){animation-delay:.32s}.loading-card p{font-size:13px;letter-spacing:1px;margin:5px 0 15px}.loading-caption{font-size:11px;letter-spacing:2px;color:#668b8b}
+@keyframes sea-breathe{0%,70%,100%{transform:translateY(0);opacity:.35}35%{transform:translateY(-9px);opacity:1}}
+@media(prefers-reduced-motion:reduce){.loading-orbit i{animation:none;opacity:.7}}
+
+/* The toolbar and portrait stay put; the résumé column owns its scroll area. */
+.experience.resume-glass[open]{display:grid;grid-template-rows:72px minmax(0,1fr);height:min(800px,calc(100vh - 40px));height:min(800px,calc(100dvh - 40px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)));overflow:hidden}
+.experience .resume-layout{min-height:0;overflow:hidden}.experience .resume-sidebar{min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.experience .resume-main{min-height:0;overflow-y:scroll;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#66878e80 #ffffff30;-webkit-overflow-scrolling:touch}
+.resume-main::-webkit-scrollbar{width:7px}.resume-main::-webkit-scrollbar-track{background:#ffffff30;border-radius:8px}.resume-main::-webkit-scrollbar-thumb{background:#66878e80;border:2px solid transparent;background-clip:padding-box;border-radius:8px}
+.resume-main:focus-visible{outline:2px solid #66878e;outline-offset:-3px}
+@media(max-width:600px){.experience.resume-glass[open]{grid-template-rows:60px minmax(0,1fr)}.experience .resume-layout{display:flex;flex-direction:column}.experience .resume-sidebar{flex:0 0 auto;grid-template-columns:64px 1fr;padding:14px 20px;gap:9px 16px;overflow:hidden}.experience .resume-main{flex:1;padding:20px}.resume-identity h3{font-size:29px;margin:7px 0}.resume-photo-label{display:none}.resume-skills{gap:8px}.resume-skills .skill-tags span{font-size:8px;padding:4px 6px}}

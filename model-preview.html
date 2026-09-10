@@ -1,12 +1,14 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css"><link rel="stylesheet" href="./resume.css"><script type="importmap">{"imports":{"three":"./three.module.js"}}</script><link rel="stylesheet" href="./compatibility.css"></head>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css?v=20260910b"><link rel="stylesheet" href="./resume.css?v=20260910b"><script type="importmap">{"imports":{"three":"./three.module.js?v=20260910b"}}</script><link rel="stylesheet" href="./compatibility.css?v=20260910b"></head>
 <body>
 <!-- accessible-resume:start -->
 <button id="resume-mode">阅读图文履历 ↗</button>
-<main id="accessible-resume" aria-label="Lam 的图文履历">
+<section id="loading-screen" aria-label="正在加载三维履历"><div class="loading-card"><div class="loading-brand">Lam<span>.</span></div><div class="loading-orbit" aria-hidden="true"><i></i><i></i><i></i></div><p id="loading-message" role="status">正在加载三维肖像…</p><span class="loading-caption">海风与故事，马上就到。</span></div></section>
+<noscript><style>#loading-screen{display:none!important}#accessible-resume[hidden]{display:block!important}</style></noscript>
+<main id="accessible-resume" aria-label="Lam 的图文履历" hidden>
  <p class="paper-brand">Lam.<span>A LITTLE ABOUT ME</span></p>
  <div class="paper-hero"><img src="./portrait-poster.jpg" width="640" height="800" alt="Lam 吐舌头微笑的虚拟肖像"><div><div class="eyebrow">SOMEWHERE BY THE SEA</div><h1>认真生活，<br>偶尔调皮。</h1><p>每一段经历，都是我的一部分。<br>从这里开始，认识多一点的我。</p></div></div>
  <div class="paper-status"><p id="load-message" role="status">图文履历可直接浏览；开启 JavaScript 后可尝试三维肖像。</p><div class="paper-actions"><button id="read-resume">先看图文履历</button><button id="retry-3d" hidden>重试三维肖像 ↗</button></div></div>
- <article class="paper-record"><small>校园经历 · 2020 — 2024 · 示例内容</small><h2>示例学校 · 校园活动策划</h2><h3>把好奇心，变成行动</h3><p>这里是可替换的校园经历。
+<article class="paper-record"><small>校园经历 · 2020 — 2024 · 示例内容</small><h2>示例学校 · 校园活动策划</h2><h3>把好奇心，变成行动</h3><p>这里是可替换的校园经历。
 
 从一次校园活动开始，练习把想法写成方案、协调伙伴，再把现场照顾好。可以在这里介绍你的学校、专业、社团经历或具体项目。
 
@@ -35,7 +37,7 @@
    <div class="resume-skills" id="skills-section"><h4>能力与方向</h4><div id="experience-skills" class="skill-tags"></div></div>
    <div class="resume-signature"><span>✳</span><span>保持好奇，持续生长。</span></div>
   </aside>
-  <article class="resume-main">
+  <article class="resume-main" tabindex="0" role="region" aria-label="履历正文，可上下滚动">
    <div class="resume-heading"><div class="resume-meta"><span id="experience-category" class="resume-category"></span><span id="experience-period"></span></div><h2 id="experience-organization"></h2><p id="experience-title" class="resume-title"></p></div>
    <section class="resume-section"><div class="section-label"><span class="timeline-dot"></span><h3>经历概览</h3><span>OVERVIEW</span></div><p id="experience-description" class="resume-description"></p></section>
    <section class="resume-section" id="highlights-section"><div class="section-label"><span class="timeline-dot"></span><h3>主要职责与成果</h3><span>CONTRIBUTIONS</span></div><ul id="experience-highlights" class="resume-highlights"></ul></section>
@@ -44,6 +46,6 @@
  </div>
 </dialog>
 
-<script src="./boot.js" defer></script></body></html>
+<script src="./boot.js?v=20260910b" defer></script></body></html>
 
 

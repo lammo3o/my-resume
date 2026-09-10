@@ -1,16 +1,16 @@
 /* Keep the résumé usable even when the 3D engine cannot start. No module dependency. */
 (function () {
- var panel=document.getElementById('accessible-resume'),message=document.getElementById('load-message');
+ var panel=document.getElementById('accessible-resume'),message=document.getElementById('load-message'),loader=document.getElementById('loading-screen'),loadingMessage=document.getElementById('loading-message');
  var timer,active=true,stop=function(){};
  function fallback(text){
   active=false;clearTimeout(timer);stop();document.body.setAttribute('data-experience','fallback');
-  panel.hidden=false;message.textContent=text;document.getElementById('retry-3d').hidden=false;
+  loader.hidden=true;panel.hidden=false;message.textContent=text;document.getElementById('retry-3d').hidden=false;
  }
  window.avatarBoot={
   alive:function(){return active;},
   onStop:function(fn){stop=fn;},
-  progress:function(text){if(active)message.textContent=text;},
-  ready:function(){if(!active)return;clearTimeout(timer);document.body.setAttribute('data-experience','ready');panel.hidden=true;},
+  progress:function(text){if(active)loadingMessage.textContent=text;},
+  ready:function(){if(!active)return;clearTimeout(timer);document.body.setAttribute('data-experience','ready');panel.hidden=true;loader.hidden=true;},
   fail:function(){fallback('暂时无法展示三维肖像，你仍可以在这里阅读完整履历。');}
  };
  document.getElementById('read-resume').onclick=function(){fallback('图文履历 · 慢慢了解我');};
@@ -25,9 +25,9 @@
  }catch(e){}
  if(!supports){fallback('当前浏览器暂不支持三维展示，图文履历可直接浏览。');return;}
  document.body.setAttribute('data-experience','loading');
- message.textContent='正在准备海边的三维肖像，你可以先往下阅读履历…';
+ panel.hidden=true;loader.hidden=false;loadingMessage.textContent='正在加载三维肖像…';
  timer=setTimeout(function(){fallback('加载时间较长。你可以先阅读履历，或重试轻量三维版。');},45000);
  window.addEventListener('error',function(e){if(e.error)window.avatarBoot.fail();});
  window.addEventListener('unhandledrejection',function(){window.avatarBoot.fail();});
- var script=document.createElement('script');script.type='module';script.src='./portfolio.js';script.onerror=window.avatarBoot.fail;document.body.appendChild(script);
+ var script=document.createElement('script');script.type='module';script.src='./portfolio.js?v=20260910b';script.onerror=window.avatarBoot.fail;document.body.appendChild(script);
 }());

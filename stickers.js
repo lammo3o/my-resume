@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {DecalGeometry} from './DecalGeometry.js';
+import {DecalGeometry} from './DecalGeometry.js?v=20260910b';
 
 // Native vector artwork: sharp at all resolutions and independent of external image services.
 export function stickerSVG(kind,cover=false){
@@ -11,7 +11,16 @@ export function stickerSVG(kind,cover=false){
 export const svgURL=s=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
 
 export class StickerLayer{
-  constructor(body){this.body=body;this.items=[];this.textures={};for(const kind of ['school','escape']){const t=new THREE.TextureLoader().load(svgURL(stickerSVG(kind)));t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;this.textures[kind]=t;}}
+  constructor(body){
+    this.body=body;this.items=[];this.textures={};
+    const loader=new THREE.TextureLoader();
+    // Raster assets avoid SVG-to-WebGL upload differences on iOS browsers.
+    this.ready=Promise.all(['school','escape'].map(async kind=>{
+      const url=kind==='school'?'./sticker-school.png':'./sticker-escape.png';
+      const t=await loader.loadAsync(url);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=1;
+      this.textures[kind]=t;return t;
+    }));
+  }
   rebuild(configs){
     for(const item of this.items){this.body.remove(item.mesh);item.mesh.geometry.dispose();item.mesh.material.dispose();}
     this.items=configs.map(config=>this.create(config));
@@ -37,8 +46,8 @@ export class StickerLayer{
     const proxy=new THREE.Mesh(subset);proxy.updateMatrixWorld(true);
     const geometry=new DecalGeometry(proxy,p,new THREE.Euler().setFromQuaternion(orientation),new THREE.Vector3(config.size,config.size,config.size*.7));subset.dispose();
     const gp=geometry.attributes.position,gn=geometry.attributes.normal;
-    for(let i=0;i<gp.count;i++)gp.setXYZ(i,gp.getX(i)+gn.getX(i)*.0006,gp.getY(i)+gn.getY(i)*.0006,gp.getZ(i)+gn.getZ(i)*.0006);
-    const material=new THREE.MeshStandardMaterial({map:this.textures[config.kind],transparent:true,alphaTest:.25,roughness:.62,metalness:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,emissive:0x58c8ac,emissiveIntensity:0});
+    for(let i=0;i<gp.count;i++)gp.setXYZ(i,gp.getX(i)+gn.getX(i)*.001,gp.getY(i)+gn.getY(i)*.001,gp.getZ(i)+gn.getZ(i)*.001);
+    const material=new THREE.MeshStandardMaterial({map:this.textures[config.kind],transparent:true,alphaTest:.15,roughness:.62,metalness:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-4,emissive:0x58c8ac,emissiveIntensity:0});
     const mesh=new THREE.Mesh(geometry,material);mesh.name=`sticker:${config.id}`;mesh.renderOrder=3;mesh.userData.stickerId=config.id;this.body.add(mesh);
     return {config,mesh};
   }
