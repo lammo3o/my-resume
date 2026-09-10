@@ -19,3 +19,4 @@ body:not([data-experience="ready"])>#resume-mode,body[data-story]:not([data-stor
 @media(pointer:coarse) and (max-width:650px){.viewbar button{min-height:44px}}
 @media(max-height:500px) and (orientation:landscape){.intro{display:none}.masthead{top:12px}.brand span{display:none}.bottom{bottom:8px}.viewbar{padding:3px}.viewbar button{padding:5px 10px}#quick-stickers{top:65px;bottom:auto;left:auto;right:16px}#resume-mode{bottom:72px;left:20px;right:auto;top:auto}}
 @media(max-width:360px){.resume-toolbar-label{display:none}.paper-brand span{font-size:8px;letter-spacing:1.5px}.paper-hero .eyebrow{font-size:8px;letter-spacing:1.5px}.paper-hero{grid-template-columns:100px 1fr;gap:14px}}
+@media(max-width:650px) and (max-height:700px){.intro{display:none}}
