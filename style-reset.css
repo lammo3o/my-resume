@@ -1,0 +1,2 @@
+/* Keep system fonts available offline. */
+body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
