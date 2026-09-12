@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {DecalGeometry} from './DecalGeometry.js?v=20260910b';
+import {DecalGeometry} from './DecalGeometry.js?v=20260912show';
 
 // Native vector artwork: sharp at all resolutions and independent of external image services.
 export function stickerSVG(kind,cover=false){
@@ -47,7 +47,11 @@ export class StickerLayer{
     const geometry=new DecalGeometry(proxy,p,new THREE.Euler().setFromQuaternion(orientation),new THREE.Vector3(config.size,config.size,config.size*.7));subset.dispose();
     const gp=geometry.attributes.position,gn=geometry.attributes.normal;
     for(let i=0;i<gp.count;i++)gp.setXYZ(i,gp.getX(i)+gn.getX(i)*.001,gp.getY(i)+gn.getY(i)*.001,gp.getZ(i)+gn.getZ(i)*.001);
-    const material=new THREE.MeshStandardMaterial({map:this.textures[config.kind],transparent:true,alphaTest:.15,roughness:.62,metalness:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-4,emissive:0x58c8ac,emissiveIntensity:0});
+    // Cut out only the empty background; printed pixels are opaque, not alpha-blended skin.
+    // Preserve the tested iOS depth offset and depth-write behavior.
+    const material=new THREE.MeshStandardMaterial({map:this.textures[config.kind],transparent:false,opacity:1,alphaTest:.5,roughness:.85,metalness:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-4,emissive:0x58c8ac,emissiveIntensity:0});
+    material.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <alphatest_fragment>','#include <alphatest_fragment>\ndiffuseColor.a=1.;');};
+    material.customProgramCacheKey=()=> 'opaque-diecut-sticker-v1';
     const mesh=new THREE.Mesh(geometry,material);mesh.name=`sticker:${config.id}`;mesh.renderOrder=3;mesh.userData.stickerId=config.id;this.body.add(mesh);
     return {config,mesh};
   }

@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css?v=20260910b"><link rel="stylesheet" href="./resume.css?v=20260910b"><script type="importmap">{"imports":{"three":"./three.module.js?v=20260910b"}}</script><link rel="stylesheet" href="./compatibility.css?v=20260910b"></head>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#96cbd6"><title>Lam · 3D 互动履历</title><meta name="description" content="在海边认识 Lam：转动三维人物，点开贴纸，阅读每一段经历。"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="./portfolio.css?v=20260912show"><link rel="stylesheet" href="./resume.css?v=20260912show"><script type="importmap">{"imports":{"three":"./three.module.js?v=20260912show"}}</script><link rel="stylesheet" href="./compatibility.css?v=20260912show"><link rel="stylesheet" href="./design-system.css?v=20260912show"><link rel="preload" href="./bungee-core.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./chinese-fonts.css?v=20260912show"><link rel="stylesheet" href="./typography.css?v=20260912show"><link rel="stylesheet" href="./variety-fonts.css?v=20260912show"><link rel="stylesheet" href="./variety-type.css?v=20260912show"></head>
 <body>
 <!-- accessible-resume:start -->
 <button id="resume-mode">阅读图文履历 ↗</button>
@@ -22,18 +22,18 @@
 <!-- accessible-resume:end -->
 
 <canvas id="scene" aria-label="可旋转的三维人物；点击脸上的贴纸阅读经历"></canvas>
-<header class="masthead"><div class="brand">Lam.<span>A LITTLE ABOUT ME</span></div><span class="public-badge">公开预览</span></header>
-<section class="intro"><div class="eyebrow">SOMEWHERE BY THE SEA</div><h1>认真生活，<br>偶尔调皮。</h1><p>把走过的地方，变成身上的小贴纸。<br>点开一张，认识多一点的我。</p><div class="note"><span>↗</span><span>试着点一下脸上的小贴纸</span></div></section>
+<header class="masthead"><div class="brand">Jeffrey Lam<span>我的互动履历</span></div><span class="public-badge">公开预览</span></header>
+<section class="intro"><div class="eyebrow">嗨，很高兴认识你。</div><h1><span>Jeffrey</span><span class="name-last">Lam<span class="signature-dot">.</span></span></h1><p><span class="intro-lead"><span>认真生活，</span><span class="lead-punch">偶尔调皮。</span></span><span class="intro-note">我的校园与工作经历，都藏在这些小贴纸里。</span></p></section>
 <nav id="quick-stickers" aria-label="履历贴纸快捷入口"></nav>
-<div class="bottom"><div class="hint">左键拖动 · 转个角度认识我<br>滚轮缩放 · 点击贴纸看经历</div><nav class="viewbar" aria-label="视角与动画"><button data-view="portrait" class="active">肖像</button><button data-view="face">近看</button><button data-view="half">半身</button><button data-view="back">背面</button><button id="gaze-toggle" aria-pressed="true">眼神跟随</button><button id="motion" aria-pressed="true">海浪暂停</button></nav></div>
+<div class="bottom"><div class="hint">左键拖动 · 转个角度认识我<br>滚轮缩放 · 点击贴纸看经历</div><nav class="viewbar" aria-label="视角与动画"><button data-view="portrait" class="active">肖像</button><button data-view="face">近看</button><button data-view="half">半身</button><button data-view="back">背面</button><button id="gaze-toggle" aria-pressed="true">眼神跟随</button><button id="motion" aria-pressed="true">动画暂停</button></nav></div>
 <div id="status" role="status">正在加载你的高精度肖像…</div><div id="tooltip" hidden></div><div id="toast" role="status" hidden></div>
 
 <dialog id="experience" class="experience resume-glass" aria-labelledby="experience-title">
- <header class="resume-toolbar"><span class="resume-wordmark">Lam<span> / 履历</span></span><span class="resume-toolbar-label">PERSONAL RECORD</span><button class="close" aria-label="关闭履历"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 7 10 10M17 7 7 17"/></svg></button></header>
+ <header class="resume-toolbar"><span class="resume-wordmark">Lam<span> / 履历</span></span><span class="resume-toolbar-label">我的经历</span><button class="close" aria-label="关闭履历"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 7 10 10M17 7 7 17"/></svg></button></header>
  <div class="resume-layout">
   <aside class="resume-sidebar">
    <div class="resume-photo"><img id="experience-image" alt="经历配图"><span id="experience-label" class="resume-photo-label"></span></div>
-   <div class="resume-identity"><span class="resume-kicker">THE PERSON BEHIND THE STICKER</span><h3>Lam<span>.</span></h3><p>每一段经历，都是我的一部分。</p></div>
+   <div class="resume-identity"><span class="resume-kicker">每张贴纸，都是一段经历</span><h3>Jeffrey<br>Lam<span>.</span></h3><p>每一段经历，都是我的一部分。</p></div>
    <div class="resume-skills" id="skills-section"><h4>能力与方向</h4><div id="experience-skills" class="skill-tags"></div></div>
    <div class="resume-signature"><span>✳</span><span>保持好奇，持续生长。</span></div>
   </aside>
@@ -46,6 +46,6 @@
  </div>
 </dialog>
 
-<script src="./boot.js?v=20260910b" defer></script></body></html>
+<script src="./boot.js?v=20260912show" defer></script></body></html>
 
 

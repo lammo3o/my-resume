@@ -1,0 +1,37 @@
+/* The portrait is the cover; navigation lives quietly around its edges. */
+:root{--portrait-white:#f5f3e9;--portrait-ink:#29474a}
+body[data-experience="ready"]::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;background:linear-gradient(180deg,transparent 61%,#142d344f 85%,#142d3459)}
+.masthead{top:32px;left:42px;right:42px;color:var(--portrait-ink)}
+.brand{font:italic 500 31px Georgia,'Times New Roman',serif;letter-spacing:-1.8px}
+.brand span{font:9px 'Microsoft YaHei UI',sans-serif;letter-spacing:2.5px;margin-top:8px}
+.intro{left:50%;right:auto;top:auto;bottom:119px;transform:translateX(-50%);width:min(760px,90vw);max-width:none;text-align:center;color:var(--portrait-white);z-index:2;text-shadow:0 2px 22px #172d3544}
+.intro .eyebrow{justify-content:center;font:9px 'Microsoft YaHei UI',sans-serif;letter-spacing:3.5px;opacity:.82}
+.intro .eyebrow:before{display:none}
+.intro h1{font:italic 400 clamp(48px,6.3vw,90px)/1 Georgia,'Times New Roman',serif;letter-spacing:-5px;margin:13px 0 17px;white-space:nowrap}
+.intro h1 em{font-weight:400}.signature-dot{color:#edc789}
+.intro p{font-size:12px;line-height:1.9;max-width:none;margin:0;letter-spacing:1.2px}
+.intro p br{display:none}.intro .note{position:fixed;right:-18vw;bottom:280px;margin:0;font-size:11px;text-align:left;line-height:1.8;opacity:.8;transform:rotate(-7deg)}
+.intro .note span:first-child{font:38px Georgia,serif}
+.bottom{bottom:25px;left:42px;right:42px;align-items:center}.hint{font-size:10px;color:#f5f3e9b3;letter-spacing:.7px}
+.viewbar{border:1px solid #ffffff40;background:#f5f8f0bc;box-shadow:0 8px 36px #253f3e18;backdrop-filter:blur(24px) saturate(1.1);-webkit-backdrop-filter:blur(24px) saturate(1.1)}
+.viewbar button.active{background:#385357}.viewbar button{font-size:11px;padding:10px 14px}
+#quick-stickers{top:120px;right:42px;flex-direction:column;gap:9px}
+#quick-stickers button{font-size:11px;display:flex;align-items:center;padding:9px 15px;background:#f4f6ed9c;backdrop-filter:blur(18px);border:1px solid #ffffff60}
+#quick-stickers img{width:29px;margin-right:9px}
+#resume-mode{left:42px;bottom:92px;border-color:#ffffff45;background:#f4f6edb3}
+.public-badge{color:#355456;background:#f4f6ed80!important;border-color:#ffffff60!important}
+body[data-view="half"] .intro,body[data-view="back"] .intro{opacity:0;visibility:hidden}
+body[data-story]:not([data-story="idle"]) .intro{opacity:0;transition:opacity .3s}
+body[data-experience="ready"] .intro{animation:portrait-intro 1.1s ease-out both}
+@keyframes portrait-intro{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+@media(max-width:850px){.intro .note{display:none}.intro{bottom:135px}.bottom{justify-content:center}.masthead{left:25px;right:25px}#quick-stickers{right:25px}.intro h1{font-size:64px}}
+@media(max-width:650px){
+ .masthead{top:calc(19px + env(safe-area-inset-top,0px));left:23px;right:23px}.brand{font-size:29px}.brand span{font-size:7px;letter-spacing:1.7px}
+ .intro{top:auto;bottom:calc(171px + env(safe-area-inset-bottom,0px));left:50%;right:auto;width:95vw}.intro .eyebrow{display:none}.intro h1{font-size:clamp(42px,12vw,67px);letter-spacing:-3px;margin:0 0 9px}.intro p{display:block;font-size:10px;letter-spacing:.5px;line-height:1.75}.intro p br{display:block}
+ #quick-stickers{top:auto;right:0;left:0;bottom:calc(112px + env(safe-area-inset-bottom,0px));flex-direction:row;gap:9px}#quick-stickers button{padding:6px 13px;font-size:10px}#quick-stickers img{width:25px;margin-right:5px}
+ .bottom{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px))}.viewbar{padding:5px}.viewbar button{padding:6px 8px;font-size:10px}
+ #resume-mode{left:auto;right:22px;bottom:auto;top:calc(67px + env(safe-area-inset-top,0px));min-height:36px;padding:8px 11px}
+}
+@media(max-height:700px) and (max-width:650px){.intro{bottom:163px}.intro p{display:none}.intro h1{font-size:40px}}
+@media(max-height:500px) and (orientation:landscape){.intro{display:none}#quick-stickers{top:65px;bottom:auto;left:auto;right:16px;flex-direction:row}.bottom{bottom:8px}#resume-mode{bottom:72px;left:20px;right:auto;top:auto}}
+@media(prefers-reduced-motion:reduce){body[data-experience="ready"] .intro{animation:none}}

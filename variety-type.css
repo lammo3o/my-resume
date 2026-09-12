@@ -1,0 +1,39 @@
+/* Variety-show name card: chunky lettering, layered ink and an upbeat entrance. */
+:root{--display:'Lam Show Latin',var(--body);--play:'Lam Show Han','Lam Text',sans-serif;--show-yellow:#ffe18b;--show-orange:#f5a17c}
+.brand,.brand:before,.resume-wordmark,.resume-identity h3,.paper-brand,.loading-brand{font-weight:400;font-synthesis:none}
+.brand{font-size:20px;letter-spacing:-.6px}.brand:before{font-size:25px}
+.intro .eyebrow{display:inline-flex;width:max-content;padding:5px 13px 5px 10px;background:var(--show-yellow);color:var(--ink);border:2px solid var(--ink);border-radius:8px;box-shadow:3px 3px 0 var(--ink);font-size:18px;line-height:1.2;letter-spacing:.04em;transform:rotate(-3deg)}
+.intro .eyebrow:before{box-shadow:none;width:6px;height:6px;background:var(--ink)}
+.intro h1{font:400 clamp(64px,6.5vw,104px)/1.04 var(--display);letter-spacing:-.045em;margin:27px 0 25px;color:var(--paper);-webkit-text-stroke:4px var(--ink);paint-order:stroke fill;text-shadow:1px 1px 0 var(--ink),2px 2px 0 var(--ink),3px 3px 0 var(--ink),4px 4px 0 var(--ink),6px 7px 0 var(--show-orange);font-synthesis:none}
+.intro h1>span:first-child{width:max-content;transform:rotate(-4deg);transform-origin:15% 80%}
+.intro h1 .name-last{font-size:1.28em;width:max-content;margin-left:.12em;line-height:1.06;color:var(--show-yellow);transform:rotate(2deg);text-shadow:inherit;letter-spacing:-.04em}
+.intro h1 .signature-dot{color:var(--show-orange);transform:rotate(-8deg);margin-left:.04em}
+.intro .intro-lead{display:flex;flex-wrap:wrap;gap:5px 10px;font:400 30px/1.2 var(--play);letter-spacing:.03em;margin:0 0 13px;color:var(--paper);text-shadow:none}
+.intro-lead>span{display:inline-block;padding:2px 3px;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:2px 3px 0 var(--ink);transform:rotate(-2deg)}
+.intro-lead .lead-punch{color:var(--show-yellow);transform:rotate(3deg) translateY(-2px)}
+.intro .intro-note{font-size:13px;line-height:1.75;max-width:360px}
+#quick-stickers button{font-size:23px;letter-spacing:.04em;font-synthesis:none}
+#quick-stickers .sticker-caption{font:400 10px/1.5 var(--body);letter-spacing:0}
+.resume-wordmark{font-size:22px}.resume-identity h3{font-size:36px;line-height:1.18;letter-spacing:-1px}
+.resume-signature{font-size:20px}.paper-hero h1{font-size:clamp(35px,4vw,60px)}
+.loading-brand{font-size:58px;letter-spacing:-2px;color:var(--show-yellow);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:3px 4px 0 var(--ink)}
+body[data-experience='ready'] .intro h1>span{animation:show-title-pop .65s cubic-bezier(.18,1.35,.32,1) both}
+body[data-experience='ready'] .intro h1 .name-last{animation-delay:.12s}
+@keyframes show-title-pop{from{opacity:0;scale:.82;translate:0 15px}to{opacity:1;scale:1;translate:0 0}}
+@media(min-width:1051px) and (max-height:750px){.intro h1{font-size:76px;margin:22px 0 18px}.intro .intro-lead{font-size:25px;margin-bottom:9px}.intro .intro-note{font-size:12px}}
+@media(max-width:1050px){
+ .intro .eyebrow{display:none}.intro h1{font-size:49px;line-height:1.1;letter-spacing:-.04em;margin:0 0 12px;-webkit-text-stroke-width:3px;text-shadow:2px 3px 0 var(--ink),4px 5px 0 var(--show-orange)}
+ .intro h1>span:first-child,.intro h1 .name-last{display:inline-block;width:auto;font-size:1em;line-height:inherit;transform:rotate(-3deg)}
+ .intro h1 .name-last{margin-left:.15em;transform:rotate(3deg)}
+ .intro .intro-lead{justify-content:center;font-size:25px;gap:5px;margin-bottom:8px}.intro .intro-note{max-width:none;font-size:12px}
+}
+@media(max-width:650px){
+ .brand{font-size:15px;letter-spacing:-.35px}.brand:before{font-size:22px}
+ .intro h1{font-size:clamp(26px,8.1vw,43px);margin-bottom:10px;-webkit-text-stroke-width:2.5px;text-shadow:2px 2px 0 var(--ink),3px 4px 0 var(--show-orange)}
+ .intro .intro-lead{font-size:23px;gap:2px;margin-bottom:6px}.intro-lead>span{-webkit-text-stroke-width:1.5px;text-shadow:1px 2px 0 var(--ink);padding:1px}
+ .intro .intro-note{font-size:11px;line-height:1.6}#quick-stickers button{font-size:21px}
+ .resume-identity h3{font-size:26px;line-height:1.18}.resume-wordmark{font-size:20px}
+}
+@media(max-width:650px) and (max-height:700px){.intro h1{font-size:29px}.intro p{display:none}}
+@media(max-height:500px) and (orientation:landscape){#quick-stickers button{font-size:17px;letter-spacing:0}}
+@media(prefers-reduced-motion:reduce){body[data-experience='ready'] .intro h1>span{animation:none}}

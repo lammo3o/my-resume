@@ -29,5 +29,5 @@
  timer=setTimeout(function(){fallback('加载时间较长。你可以先阅读履历，或重试轻量三维版。');},45000);
  window.addEventListener('error',function(e){if(e.error)window.avatarBoot.fail();});
  window.addEventListener('unhandledrejection',function(){window.avatarBoot.fail();});
- var script=document.createElement('script');script.type='module';script.src='./portfolio.js?v=20260910b';script.onerror=window.avatarBoot.fail;document.body.appendChild(script);
+ var script=document.createElement('script');script.type='module';script.src='./portfolio.js?v=20260912show';script.onerror=window.avatarBoot.fail;document.body.appendChild(script);
 }());
